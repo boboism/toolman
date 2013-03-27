@@ -1,0 +1,109 @@
+zh-CN:
+  layouts:
+    application:
+      title: '发动机刀具管理系统'
+      description: '发动机刀具管理系统'
+    navigation:
+      placeholder: '填入刀具号查询'
+      fin_mgmt:
+        title: '财务功能'
+        master_data: '主数据管理'
+        users_and_roles: '用户与角色'
+        fixed_asset_classes: '资产类别'
+        store_locations: '存放地点'
+        cost_centers: '成本费用中心'
+        departments: '组织架构'
+      asset_mgmt:
+        title: '归口功能'
+        unclassified_goods_lists: '待判断资产'
+  home:
+    index:
+      master_data: "基础数据"
+      new_tool_part: "新增刃具"
+      import_tool_part: "导入刃具"
+      list_tool_part: "刃具清单"
+      new_tool_bom: "新增工序号—刀号"
+      import_tool_bom: "导入工序号—刀号"
+      list_tool_bom: "工序号—刀号清单"
+      tunning_diagram: "调刀图"
+      scan: "扫描刀号"
+      new_scan: "导入调刀图"
+      index_tunning_diagram: "调刀图清单"
+      issue: "发放"
+      new_issue: "发放刀具"
+      index_issue: "发放清单"
+      receive: "回收"
+      new_receive: "回收刀具"
+      index_receive: "回收清单"
+      tune: "调刀"
+      new_tune: "调刀"
+      index_tune: "调刀清单"
+      grind: "磨刀"
+      new_grind: "磨刀"
+      index_grind: "磨刀清单"
+  tunning_diagrams:
+    index:
+      scan: "扫描刀号"
+  tool_parts:
+    index:
+      import: "导入"
+  users:
+    index:
+      title: '用户列表'
+      change_role: '修改角色'
+      delete_user: '删除用户'
+      delete_user_confirm: '是否确认删除此用户？'
+    show:
+      change_role: '修改角色'
+  fixed_asset_classes:
+    index:
+      search:
+        placeholder: '请输入编号或者名称'
+  unclassified_goods_lists:
+    index:
+      search:
+      placeholder:
+        text: '资产部门、成本费用中心、投资管理号、财务审批号、合同号、开箱验收单、采购单、品名'
+      buttons:
+        confirm: '确认'
+        confirm_message: '是否确定？'
+  work_orders:
+    new_issue:
+      title: "发放"
+    index_issue:
+      title: "发放清单"
+      issue: "发放"
+      issued_at_start: "发放日期开始于"
+      issued_at_end: "发放日期结束于"
+      hilt_no: "工序号—刀号"
+    new_receive:
+      title: "回收"
+    index_receive:
+      title: "回收清单"
+      receive: "回收"
+      received: "只看已回收记录"
+      received_at_start: "回收日期开始于"
+      received_at_end: "回收日期结束于"
+      hilt_no: "工序号—刀号"
+    new_tune:
+      title: "调刀"
+    index_tune:
+      title: "调刀清单"
+      tune: "调刀"
+      tuned: "只看已调刀记录"
+      tuned_at_start: "调刀日期开始于"
+      tuned_at_end: "调刀日期结束于"
+      hilt_no: "工序号—刀号"
+    new_grind:
+      title: "磨刀"
+    index_grind:
+      title: "磨刀清单"
+      grind: "磨刀"
+      grinded: "只看已磨刀记录"
+      grinded_at_start: "磨刀日期开始于"
+      grinded_at_end: "磨刀日期结束于"
+      hilt_no: "工序号—刀号"
+      serial_no: "刃具"
+  tool_boms:
+    index:
+      import: "导入"

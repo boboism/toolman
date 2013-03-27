@@ -1,0 +1,24 @@
+- model_class = @tunning_diagram.class
+.row-fluid.page-header
+  .span5
+    = form_tag scan_tunning_diagrams_path, method: :get, class: "form-search" do
+      .row-fluid
+        .span12
+          .input-append
+            = text_field_tag "[tunning_diagram][hilt_no]", nil, class: "search-query", placeholder: t(".placehoder", default: t("helpers.links.search_placeholder")), autofocus: true
+            = button_tag class: "btn" do
+              %i.icon-search
+              %span= t(".search", default: t("helpers.links.search"))
+  .span3
+    %h3= @tunning_diagram.hilt_no
+  .span4
+    .pull-right
+      .btn-group
+        = link_to tunning_diagrams_path, class: "btn" do
+          %i.icon-list
+          %span= t(".index", default: t("helpers.links.index"))
+      .btn-group
+        = render "layouts/toolbar"
+- if @tunning_diagram.persisted?
+  .row-fluid
+    .span12= image_tag @tunning_diagram.archive.url

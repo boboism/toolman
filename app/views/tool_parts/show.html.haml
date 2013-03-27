@@ -1,0 +1,114 @@
+- model_class = @tool_part.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: "#{model_class.model_name.human}: #{@tool_part.id}", default: t("helpers.views.show.title", title: "#{model_class.model_name.human}: #{@tool_part.id}"))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to edit_tool_part_path(@tool_part), class: "btn" do
+          %i.icon-pencil
+          %span= t(".edit", default: t("helpers.links.edit"))
+
+        = link_to @tool_part, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+          %i.icon-trash.icon-white
+          %span= t(".destroy", default: t("helpers.links.destroy"))
+        = link_to tool_parts_path, class: "btn" do
+          %i.icon-list
+          %span= t(".index", default: t("helpers.links.index"))
+      .btn-group
+        = render "layouts/toolbar"
+
+.row-fluid
+  .span12
+    %table.table.table-bordered.table-hover.table-condensed.my-table-sheet
+      %tbody
+        %tr
+          %th.span2= model_class.human_attribute_name(:model)
+          %td.span10= @tool_part.model
+        %tr
+          %th.span2= model_class.human_attribute_name(:category)
+          %td.span10= @tool_part.category
+        %tr
+          %th.span2= model_class.human_attribute_name(:sub_category)
+          %td.span10= @tool_part.sub_category
+        %tr
+          %th.span2= model_class.human_attribute_name(:standardized)
+          %td.span10= t(@tool_part.standardized.to_s)
+        %tr
+          %th.span2= model_class.human_attribute_name(:specification)
+          %td.span10= @tool_part.specification
+        %tr
+          %th.span2= model_class.human_attribute_name(:machine_quantity)
+          %td.span10= @tool_part.machine_quantity
+        %tr
+          %th.span2= model_class.human_attribute_name(:available_quantity)
+          %td.span10= @tool_part.available_quantity
+        %tr
+          %th.span2= model_class.human_attribute_name(:grindable)
+          %td.span10= t(@tool_part.grindable.to_s)
+        %tr
+          %th.span2= model_class.human_attribute_name(:grinding_time)
+          %td.span10= @tool_part.grinding_time
+        %tr
+          %th.span2= model_class.human_attribute_name(:processing_quantity)
+          %td.span10= @tool_part.processing_quantity
+        %tr
+          %th.span2= model_class.human_attribute_name(:grinding_machine)
+          %td.span10= @tool_part.grinding_machine
+        %tr
+          %th.span2= model_class.human_attribute_name(:grinding_man_hour)
+          %td.span10= @tool_part.grinding_man_hour
+        %tr
+          %th.span2= model_class.human_attribute_name(:material_no)
+          %td.span10= @tool_part.material_no
+        %tr
+          %th.span2= model_class.human_attribute_name(:manufacturer)
+          %td.span10= @tool_part.manufacturer
+        %tr
+          %th.span2= model_class.human_attribute_name(:supplier)
+          %td.span10= @tool_part.supplier
+        %tr
+          %th.span2= model_class.human_attribute_name(:unit_price)
+          %td.span10= @tool_part.unit_price
+        %tr
+          %th.span2= model_class.human_attribute_name(:min_purchase_quantity)
+          %td.span10= @tool_part.min_purchase_quantity
+        %tr
+          %th.span2= model_class.human_attribute_name(:stock_no)
+          %td.span10= @tool_part.stock_no
+        %tr
+          %th.span2= model_class.human_attribute_name(:stack_no)
+          %td.span10= @tool_part.stack_no
+        %tr
+          %th.span2= model_class.human_attribute_name(:stock_current)
+          %td.span10= @tool_part.stock_current
+        %tr
+          %th.span2= model_class.human_attribute_name(:stock_max)
+          %td.span10= @tool_part.stock_max
+        %tr
+          %th.span2= model_class.human_attribute_name(:stock_min)
+          %td.span10= @tool_part.stock_min
+        %tr
+          %th.span2= model_class.human_attribute_name(:compansation)
+          %td.span10= @tool_part.compansation
+        %tr
+          %th.span2= model_class.human_attribute_name(:scrapping_length)
+          %td.span10= @tool_part.scrapping_length
+        %tr
+          %th.span2= model_class.human_attribute_name(:tool_part_items)
+          %td.span10
+            - if @tool_part.tool_part_items.size > 0
+              - item_class = @tool_part.tool_part_items.first.class
+              %table.table.table-bordered.table-hover.table-condensed.my-table-sheet
+                %tbody
+                  %tr
+                    %th= item_class.human_attribute_name(:serial_no)
+                    %th= item_class.human_attribute_name(:quantity)
+                    %th= item_class.human_attribute_name(:accumulated_grinding_time)
+                    %th= item_class.human_attribute_name(:accumulated_processing_quantity)
+                  - @tool_part.tool_part_items.each do |item|
+                    %tr
+                      %td= item.serial_no
+                      %td= item.quantity
+                      %td= item.accumulated_grinding_time
+                      %td= item.accumulated_processing_quantity

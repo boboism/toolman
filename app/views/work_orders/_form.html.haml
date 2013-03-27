@@ -1,0 +1,17 @@
+= simple_form_for(@work_order, html: {class: "well form-horizontal"}) do |f|
+  = f.error_notification
+  = display_base_errors @work_order
+  .form-inputs
+    = f.input :tool_bom_id, input_html: { class: "input-block-level" }
+    = f.input :issued_at, input_html: { class: "input-block-level" }
+    = f.input :issued_by_id, input_html: { class: "input-block-level" }
+    = f.input :received_at, input_html: { class: "input-block-level" }
+    = f.input :received_by_id, input_html: { class: "input-block-level" }
+    = f.input :tuned_at, input_html: { class: "input-block-level" }
+    = f.input :tuned_by_id, input_html: { class: "input-block-level" }
+    = f.input :received, input_html: { class: "input-block-level" }
+    = f.input :tuned, input_html: { class: "input-block-level" }
+    = f.input :grinded, input_html: { class: "input-block-level" }
+
+  .form-actions
+    = f.button :submit, t('helpers.links.submit'), class: 'btn-primary'

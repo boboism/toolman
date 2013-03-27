@@ -1,0 +1,11 @@
+.row-fluid
+  .span3
+  .span6
+    = simple_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => {:class => 'form-vertical well' }) do |f|
+      %legend= t('.title')
+      = f.input :email, :autofocus => true, :placeholder => t('activerecord.attributes.user.email'), :input_html => {:class => 'input-block-level'}
+      = f.input :password, :placeholder => t('activerecord.attributes.user.password'), :input_html => {:class => 'input-block-level'}
+      = f.input :remember_me, :label => false, :inline_label => t('.remember_me'), :as => :boolean if devise_mapping.rememberable?
+      = f.button :submit, t('.submit'), :class => 'btn-primary btn-block'
+    = render 'devise/shared/links'
+  .span3

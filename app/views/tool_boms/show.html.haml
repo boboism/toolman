@@ -1,0 +1,70 @@
+- model_class = @tool_bom.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: "#{model_class.model_name.human}: #{@tool_bom.hilt_no}", default: t("helpers.views.show.title", title: "#{model_class.model_name.human}: #{@tool_bom.hilt_no}"))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to edit_tool_bom_path(@tool_bom), class: "btn" do
+          %i.icon-pencil
+          %span= t(".edit", default: t("helpers.links.edit"))
+
+        = link_to @tool_bom, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+          %i.icon-trash.icon-white
+          %span= t(".destroy", default: t("helpers.links.destroy"))
+        = link_to tool_boms_path, class: "btn" do
+          %i.icon-list
+          %span= t(".index", default: t("helpers.links.index"))
+      .btn-group
+        = render "layouts/toolbar"
+
+.row-fluid
+  .span12
+    %table.table.table-bordered.table-hover.table-condensed.my-table-sheet
+      %tbody
+        %tr
+          %th.span2= model_class.human_attribute_name(:hilt_no)
+          %td.span10= @tool_bom.hilt_no
+        %tr
+          %th.span2= model_class.human_attribute_name(:model)
+          %td.span10= @tool_bom.model
+        %tr
+          %th.span2= model_class.human_attribute_name(:product_line)
+          %td.span10= @tool_bom.product_line
+        %tr
+          %th.span2= model_class.human_attribute_name(:machine_mode)
+          %td.span10= @tool_bom.machine_mode
+        %tr
+          %th.span2= model_class.human_attribute_name(:machine_code)
+          %td.span10= @tool_bom.machine_code
+        %tr
+          %th.span2= model_class.human_attribute_name(:process_position)
+          %td.span10= @tool_bom.process_position
+        %tr
+          %th.span2= model_class.human_attribute_name(:process_hole)
+          %td.span10= @tool_bom.process_hole
+        %tr
+          %th.span2= model_class.human_attribute_name(:tunning_machine)
+          %td.span10= @tool_bom.tunning_machine
+        %tr
+          %th.span2= model_class.human_attribute_name(:tunning_mode)
+          %td.span10= @tool_bom.tunning_mode
+        %tr
+          %th.span2= model_class.human_attribute_name(:tunning_man_hour)
+          %td.span10= @tool_bom.tunning_man_hour
+        %tr
+          %th.span2= model_class.human_attribute_name(:tool_bom_items)
+          %td.span10
+            - if @tool_bom.tool_bom_items.size > 0
+              - item_class = @tool_bom.tool_bom_items.first.class
+              %table.table.table-bordered.table-hover.table-condensed.my-table-sheet
+                %tr
+                  %th= item_class.human_attribute_name(:model)
+                  %th= item_class.human_attribute_name(:quantity)
+                  %th= item_class.human_attribute_name(:grindable)
+                  - @tool_bom.tool_bom_items.each do |item|
+                    %tr
+                      %td= item.model
+                      %td= item.quantity
+                      %td= t(item.grindable.to_s)
+

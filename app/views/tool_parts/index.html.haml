@@ -1,0 +1,66 @@
+- model_class = ToolPart.new.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: model_class.model_name.human, default: t("helpers.views.index.title", title: model_class.model_name.human))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to new_tool_part_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".new", default: t("helpers.links.new"))
+        = link_to import_tool_parts_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".import")
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = form_tag model_class, method: :get, class: "form-search" do
+      .row-fluid
+        .span12
+          .input-append
+            = text_field_tag "[search][text]", nil, class: "search-query", placeholder: t(".placehoder", default: t("helpers.links.search_placeholder"))
+            = button_tag class: "btn" do
+              %i.icon-search
+              %span= t(".search", default: t("helpers.links.search"))
+.row-fluid
+  .span12
+    %table.table.table-condensed.table-hover.my-table
+      %thead
+        %tr
+          /%th= check_box_tag "check_#{model_class.name.underscore}"
+          %th= model_class.human_attribute_name(:model)
+          %th= model_class.human_attribute_name(:category)
+          %th= model_class.human_attribute_name(:sub_category)
+          %th= model_class.human_attribute_name(:standardized)
+          %th= model_class.human_attribute_name(:machine_quantity)
+          %th= model_class.human_attribute_name(:available_quantity)
+          %th= model_class.human_attribute_name(:grindable)
+          %th= model_class.human_attribute_name(:tool_part_items)
+          %th
+      %tbody
+        - @tool_parts.each do |tool_part|
+          %tr{href: tool_part_path(tool_part)}
+            /%td= check_box_tag "#{model_class.name.underscore}_id_#{tool_part.id}"
+            %td= tool_part.model
+            %td= tool_part.category
+            %td= tool_part.sub_category
+            %td= t(tool_part.standardized.to_s)
+            %td= tool_part.machine_quantity
+            %td= tool_part.available_quantity
+            %td= t(tool_part.grindable.to_s)
+            %td= tool_part.tool_part_items.map(&:serial_no).join(", ")
+            %td
+              .btn-group.pull-right
+                = link_to tool_part, class: "btn" do
+                  %i.icon-eye-open
+                  %span= t(".show", default: t("helpers.links.show"))
+                = link_to edit_tool_part_path(tool_part), class: "btn" do
+                  %i.icon-pencil
+                  %span= t(".edit", default: t("helpers.links.edit"))
+                = link_to tool_part, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+                  %i.icon-trash.icon-white
+                  %span= t(".destroy", default: t("helpers.links.destroy"))
+.row-fluid
+  .span12
+    = paginate @tool_parts

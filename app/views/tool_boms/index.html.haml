@@ -1,0 +1,68 @@
+- model_class = ToolBom.new.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: model_class.model_name.human, default: t("helpers.views.index.title", title: model_class.model_name.human))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to import_tool_boms_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".import")
+        = link_to new_tool_bom_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".new", default: t("helpers.links.new"))
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = form_tag model_class, method: :get, class: "form-search" do
+      .row-fluid
+        .span12
+          .input-append
+            = text_field_tag "[search][text]", nil, class: "search-query", placeholder: t(".placehoder", default: t("helpers.links.search_placeholder"))
+            = button_tag class: "btn" do
+              %i.icon-search
+              %span= t(".search", default: t("helpers.links.search"))
+.row-fluid
+  .span12
+    %table.table.table-condensed.table-hover.my-table
+      %thead
+        %tr
+          %th= check_box_tag "check_#{model_class.name.underscore}"
+          %th= model_class.human_attribute_name(:hilt_no)
+          %th= model_class.human_attribute_name(:product_line)
+          %th= model_class.human_attribute_name(:machine_mode)
+          %th= model_class.human_attribute_name(:machine_code)
+          %th= model_class.human_attribute_name(:process_position)
+          %th= model_class.human_attribute_name(:process_hole)
+          %th= model_class.human_attribute_name(:tunning_machine)
+          %th= model_class.human_attribute_name(:tunning_mode)
+          %th= model_class.human_attribute_name(:tunning_man_hour)
+          %th
+      %tbody
+        - @tool_boms.each do |tool_bom|
+          %tr{href: tool_bom_path(tool_bom)}
+            %td= check_box_tag "#{model_class.name.underscore}_id_#{tool_bom.id}"
+            %td= tool_bom.hilt_no
+            %td= tool_bom.product_line
+            %td= tool_bom.machine_mode
+            %td= tool_bom.machine_code
+            %td= tool_bom.process_position
+            %td= tool_bom.process_hole
+            %td= tool_bom.tunning_machine
+            %td= tool_bom.tunning_mode
+            %td= tool_bom.tunning_man_hour
+            %td
+              .btn-group.pull-right
+                = link_to tool_bom, class: "btn" do
+                  %i.icon-eye-open
+                  %span= t(".show", default: t("helpers.links.show"))
+                = link_to edit_tool_bom_path(tool_bom), class: "btn" do
+                  %i.icon-pencil
+                  %span= t(".edit", default: t("helpers.links.edit"))
+                = link_to tool_bom, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+                  %i.icon-trash.icon-white
+                  %span= t(".destroy", default: t("helpers.links.destroy"))
+.row-fluid
+  .span12
+    = paginate @tool_boms

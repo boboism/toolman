@@ -1,0 +1,7 @@
+.modal{:id => "tunning-diagram-#{tunning_diagram.id}", :style => "display: none;"}
+  .modal-header
+    %a.close{"data-dismiss" => "modal"} ×
+    %h3= tunning_diagram.hilt_no
+  .modal-body
+    .row-fluid
+      .span12= image_tag tunning_diagram.archive.url

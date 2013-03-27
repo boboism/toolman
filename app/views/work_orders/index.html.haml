@@ -1,0 +1,67 @@
+- model_class = WorkOrder.new.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: model_class.model_name.human, default: t("helpers.views.index.title", title: model_class.model_name.human))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to new_work_order_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".new", default: t("helpers.links.new"))
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = form_tag model_class, method: :get, class: "form-search" do
+      .row-fluid
+        .span12
+          .input-append
+            = text_field_tag "[search][text]", nil, class: "search-query", placeholder: t(".placehoder", default: t("helpers.links.search_placeholder"))
+            = button_tag class: "btn" do
+              %i.icon-search
+              %span= t(".search", default: t("helpers.links.search"))
+.row-fluid
+  .span12
+    %table.table.table-condensed.table-hover.my-table
+      %thead
+        %tr
+          %th= check_box_tag "check_#{model_class.name.underscore}"
+          %th= model_class.human_attribute_name(:hilt_no)
+          %th= model_class.human_attribute_name(:issued_at)
+          %th= model_class.human_attribute_name(:issued_by_id)
+          %th= model_class.human_attribute_name(:received_at)
+          %th= model_class.human_attribute_name(:received_by_id)
+          %th= model_class.human_attribute_name(:tuned_at)
+          %th= model_class.human_attribute_name(:tuned_by_id)
+          %th= model_class.human_attribute_name(:received)
+          %th= model_class.human_attribute_name(:tuned)
+          %th= model_class.human_attribute_name(:grinded)
+          %th
+      %tbody
+        - @work_orders.each do |work_order|
+          %tr{href: work_order_path(work_order)}
+            %td= check_box_tag "#{model_class.name.underscore}_id_#{work_order.id}"
+            %td= work_order.hilt_no
+            %td= work_order.issued_at
+            %td= work_order.issued_by_name
+            %td= work_order.received_at
+            %td= work_order.received_by_name
+            %td= work_order.tuned_at
+            %td= work_order.tuned_by_name
+            %td= work_order.received
+            %td= work_order.tuned
+            %td= work_order.grinded
+            %td
+              .btn-group.pull-right
+                = link_to work_order, class: "btn" do
+                  %i.icon-eye-open
+                  %span= t(".show", default: t("helpers.links.show"))
+                = link_to edit_work_order_path(work_order), class: "btn" do
+                  %i.icon-pencil
+                  %span= t(".edit", default: t("helpers.links.edit"))
+                = link_to work_order, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+                  %i.icon-trash.icon-white
+                  %span= t(".destroy", default: t("helpers.links.destroy"))
+.row-fluid
+  .span12
+    = paginate @work_orders

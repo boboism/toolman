@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %meta{ charset: 'utf-8' }
+    %meta{:'http-equiv' => 'X-UA-Compatible', content: 'IE=edge,chrome=1' }
+    %meta{ content: 'width=device-width, initial-scale=1.0', name: 'viewport' }
+    %title= content_for?(:title) ? yield(:title) : t('.title')
+    %meta{ content: content_for?(:description) ? yield(:description) : t('.description', default: t('views.layouts.application.navigation.description')), name: 'description' }
+    = stylesheet_link_tag 'application', media: 'all'
+    = csrf_meta_tags
+    = yield(:head)
+  %body{ class: "#{ controller_name } #{ action_name }" }
+    = render 'layouts/navigation'
+    .container#main{ role: 'main' }
+      .row
+        .span12
+          = render 'layouts/messages'
+          = yield
+    .footer
+      / ! end of .container
+    / ! end of #main
+    = javascript_include_tag 'application'
+    /[if lt IE 9]
+      = javascript_include_tag 'html5shiv'

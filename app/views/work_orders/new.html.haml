@@ -1,0 +1,15 @@
+- model_class = @work_order.class
+.row-fluid.page-header
+  .span5
+    %span= t(".title", title: "#{model_class.model_name.human}: #{@work_order.id}", default: t("helpers.views.edit.title", title: "#{model_class.model_name.human}: #{@work_order.id}"))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to work_orders_path, class: "btn" do
+          %i.icon-list
+          %span= t(".index", default: t("helpers.links.index"))
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = render "form"

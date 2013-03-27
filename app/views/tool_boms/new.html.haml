@@ -1,0 +1,15 @@
+- model_class = @tool_bom.class
+.row-fluid.page-header
+  .span5
+    %span= t(".title", title: "#{model_class.model_name.human}: #{@tool_bom.id}", default: t("helpers.views.edit.title", title: "#{model_class.model_name.human}: #{@tool_bom.id}"))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to tool_boms_path, class: "btn" do
+          %i.icon-list
+          %span= t(".index", default: t("helpers.links.index"))
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = render "form"

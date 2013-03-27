@@ -1,0 +1,50 @@
+- model_class = WorkOrder.new.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title")
+  .span7
+    .pull-right
+      .btn-group
+        = link_to tune_work_orders_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".tune")
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = form_tag tunes_work_orders_path, method: :get, class: "form-inline" do
+      .row-fluid
+        .span12
+          = text_field_tag "[search][text]", nil, placeholder: t(".hilt_no", default: t("helpers.links.search_placeholder")), class: "input-small"
+          = text_field_tag "[search][tuned_at_start]", nil, :"data-behaviour" => "datepicker", placeholder: t(".tuned_at_start")
+          = text_field_tag "[search][tuned_at_end]", nil, :"data-behaviour" => "datepicker", placeholder: t(".tuned_at_end")
+          = check_box_tag "[search][tuned]"
+          %span= t('.tuned')
+          = button_tag class: "btn" do
+            %i.icon-search
+            %span= t(".search", default: t("helpers.links.search"))
+.row-fluid
+  .span12
+    %table.table.table-condensed.table-hover.my-table
+      %thead
+        %tr
+          %th= model_class.human_attribute_name(:hilt_no)
+          %th= model_class.human_attribute_name(:tuned)
+          %th= model_class.human_attribute_name(:tuned_at)
+          %th= model_class.human_attribute_name(:tuned_by_id)
+          %th= model_class.human_attribute_name(:tunning_machine)
+          %th= model_class.human_attribute_name(:tunning_man_hour)
+          %th
+      %tbody
+        - @work_orders.each do |work_order|
+          %tr{href: work_order_path(work_order)}
+            %td= work_order.hilt_no
+            %td= t(work_order.tuned.to_s)
+            %td= work_order.tuned_at
+            %td= work_order.tuned_by_name
+            %td= work_order.tunning_machine
+            %td= work_order.tunning_man_hour
+            %td
+.row-fluid
+  .span12
+    = paginate @work_orders

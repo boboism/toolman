@@ -1,0 +1,57 @@
+- model_class = TunningDiagram.new.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: model_class.model_name.human, default: t("helpers.views.index.title", title: model_class.model_name.human))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to scan_tunning_diagrams_path, class: "btn" do
+          %i.icon-search
+          %span= t(".scan")
+        = link_to new_tunning_diagram_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".new", default: t("helpers.links.new"))
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = form_tag model_class, method: :get, class: "form-search" do
+      .row-fluid
+        .span12
+          .input-append
+            = text_field_tag "[search][text]", nil, class: "search-query", placeholder: t(".placehoder", default: t("helpers.links.search_placeholder"))
+            = button_tag class: "btn" do
+              %i.icon-search
+              %span= t(".search", default: t("helpers.links.search"))
+.row-fluid
+  .span12
+    %table.table.table-condensed.table-hover.my-table
+      %thead
+        %tr
+          /%th= check_box_tag "check_#{model_class.name.underscore}"
+          %th= model_class.human_attribute_name(:hilt_no)
+          %th
+      %tbody
+        - @tunning_diagrams.each do |tunning_diagram|
+          %tr{href: tunning_diagram_path(tunning_diagram)}
+            /%td= check_box_tag "#{model_class.name.underscore}_id_#{tunning_diagram.id}"
+            %td= tunning_diagram.hilt_no
+            %td
+              .btn-group.pull-right
+                %a.btn{"data-toggle" => "modal", :href => "#tunning-diagram-#{tunning_diagram.id}", :type => "button"} 
+                  %i.icon-eye-open
+                  %span= t(".show", default: t("helpers.links.show"))
+                = render tunning_diagram
+                /
+                  = link_to tunning_diagram, class: "btn" do
+                    %i.icon-eye-open
+                    %span= t(".show", default: t("helpers.links.show"))
+                  = link_to edit_tunning_diagram_path(tunning_diagram), class: "btn" do
+                    %i.icon-pencil
+                    %span= t(".edit", default: t("helpers.links.edit"))
+                = link_to tunning_diagram, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+                  %i.icon-trash.icon-white
+                  %span= t(".destroy", default: t("helpers.links.destroy"))
+.row-fluid
+  .span12
+    = paginate @tunning_diagrams

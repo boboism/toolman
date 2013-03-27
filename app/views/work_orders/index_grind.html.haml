@@ -1,0 +1,54 @@
+- model_class = WorkOrder.new.class
+- work_order_item_class = WorkOrderItem.new.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title")
+  .span7
+    .pull-right
+      .btn-group
+        = link_to grind_work_orders_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".grind")
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = form_tag grinds_work_orders_path, method: :get, class: "form-inline" do
+      .row-fluid
+        .span12
+          = text_field_tag "[search][text]", nil, placeholder: t(".hilt_no", default: t("helpers.links.search_placeholder")), class: "input-small"
+          = text_field_tag "[search][serial_no]", nil, placeholder: t(".serial_no", default: t("helpers.links.search_placeholder"))
+          = text_field_tag "[search][grinded_at_start]", nil, :"data-behaviour" => "datepicker", placeholder: t(".grinded_at_start")
+          = text_field_tag "[search][grinded_at_end]", nil, :"data-behaviour" => "datepicker", placeholder: t(".grinded_at_end")
+          = check_box_tag "[search][grinded]"
+          %span= t('.grinded')
+          = button_tag class: "btn" do
+            %i.icon-search
+            %span= t(".search", default: t("helpers.links.search"))
+.row-fluid
+  .span12
+    %table.table.table-condensed.table-hover.my-table
+      %thead
+        %tr
+          %th= model_class.human_attribute_name(:hilt_no)
+          %th= work_order_item_class.human_attribute_name(:serial_no)
+          %th= work_order_item_class.human_attribute_name(:grinded)
+          %th= work_order_item_class.human_attribute_name(:grinded_by)
+          %th= work_order_item_class.human_attribute_name(:grinding_machine)
+          %th= work_order_item_class.human_attribute_name(:grinding_mode)
+          %th= work_order_item_class.human_attribute_name(:grinding_man_hour)
+      %tbody
+        - @work_orders.each do |work_order|
+          - work_order.work_order_items.each_with_index do |work_order_item, index|
+            %tr{href: work_order_path(work_order)}
+              - if index == 0
+                %td{rowspan: work_order.work_order_items.size}= work_order.hilt_no
+              %td= work_order_item.tool_part_item.serial_no
+              %td= t(work_order_item.grinded.to_s)
+              %td= work_order_item.grinded_by_name
+              %td= work_order_item.grinding_mode
+              %td= work_order_item.grinding_machine
+              %td= work_order_item.grinding_man_hour
+.row-fluid
+  .span12
+    = paginate @work_orders

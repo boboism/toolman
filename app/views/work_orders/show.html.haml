@@ -1,0 +1,75 @@
+- model_class = @work_order.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: "#{model_class.model_name.human}: #{@work_order.id}", default: t("helpers.views.show.title", title: "#{model_class.model_name.human}: #{@work_order.id}"))
+  .span7
+    .pull-right
+      .btn-group
+        /= link_to edit_work_order_path(@work_order), class: "btn" do
+        /  %i.icon-pencil
+        /  %span= t(".edit", default: t("helpers.links.edit"))
+
+        /= link_to @work_order, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+        /  %i.icon-trash.icon-white
+        /  %span= t(".destroy", default: t("helpers.links.destroy"))
+        /= link_to work_orders_path, class: "btn" do
+        /  %i.icon-list
+        /  %span= t(".index", default: t("helpers.links.index"))
+      .btn-group
+        = render "layouts/toolbar"
+
+.row-fluid
+  .span12
+    %table.table.table-bordered.table-hover.table-condensed.my-table-sheet
+      %tbody
+        %tr
+          %th.span2= model_class.human_attribute_name(:hilt_no)
+          %td.span10= @work_order.hilt_no
+        %tr
+          %th.span2= model_class.human_attribute_name(:issued_at)
+          %td.span10= @work_order.issued_at
+        %tr
+          %th.span2= model_class.human_attribute_name(:issued_by)
+          %td.span10= "#{@work_order.issued_by.name}"
+        %tr
+          %th.span2= model_class.human_attribute_name(:received)
+          %td.span10= t(@work_order.received.to_s)
+        %tr
+          %th.span2= model_class.human_attribute_name(:received_at)
+          %td.span10= @work_order.received_at
+        %tr
+          %th.span2= model_class.human_attribute_name(:received_by)
+          %td.span10= @work_order.received_by_name
+        %tr
+          %th.span2= model_class.human_attribute_name(:tuned)
+          %td.span10= t(@work_order.tuned.to_s)
+        %tr
+          %th.span2= model_class.human_attribute_name(:tuned_at)
+          %td.span10= @work_order.tuned_at
+        %tr
+          %th.span2= model_class.human_attribute_name(:tuned_by)
+          %td.span10= @work_order.tuned_by_name
+        %tr
+          %th.span2= model_class.human_attribute_name(:work_order_items)
+          %td.span10
+            - if @work_order.work_order_items.size > 0
+              - item_class = @work_order.work_order_items.first.class
+              %table.table.table-bordered.table-hover.table-condensed.my-table-sheet
+                %tbody
+                  %tr
+                    %th= item_class.human_attribute_name(:serial_no)
+                    %th= item_class.human_attribute_name(:quantity)
+                    %th= item_class.human_attribute_name(:grinded)
+                    %th= item_class.human_attribute_name(:grinded_by)
+                    %th= item_class.human_attribute_name(:grinding_machine)
+                    %th= item_class.human_attribute_name(:grinding_mode)
+                    %th= item_class.human_attribute_name(:grinding_man_hour)
+                  - @work_order.work_order_items.each do |item|
+                    %tr
+                      %td= item.tool_part_item.serial_no
+                      %td= item.quantity
+                      %td= t(item.grinded.to_s)
+                      %td= item.grinded_by_name
+                      %td= item.grinding_machine
+                      %td= item.grinding_mode
+                      %td= item.grinding_man_hour

@@ -1,0 +1,57 @@
+.navbar.navbar-fixed-top.navbar-inverse
+  .navbar-inner
+    .container
+      %a.btn.btn-navbar.collapsed{ :'data-toggle' => 'collapse', :'data-target' => '.nav-collapse' }
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      = link_to t('layouts.application.title'), root_path, class: 'brand'
+      .nav-collapse.collapse
+        %ul.nav.pull-right
+          - if user_signed_in?
+            -# 
+              - if current_user.is_any_of?([:admin, :asset_admin])
+                %li.dropdown
+                  %a.dropdown-toggle{:'data-toggle' => 'dropdown'}
+                    %i.icon-user.icon-white
+                    %span= t('views.layouts.application.navigation.asset_mgmt.title')
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li= link_to t('views.layouts.application.navigation.asset_mgmt.unclassified_goods_lists'), unclassified_goods_lists_path
+              - if current_user.is? :fin_user or current_user.is? :admin
+                %li.dropdown
+                  %a.dropdown-toggle{:'data-toggle' => 'dropdown'}
+                    %i.icon-user.icon-white
+                    %span= t('views.layouts.application.navigation.fin_mgmt.title')
+                    %span.caret
+                  %ul.dropdown-menu
+                    %li.dropdown-submenu
+                      %a= t('views.layouts.application.navigation.fin_mgmt.master_data')
+                      %ul.dropdown-menu
+                        %li= link_to t('views.layouts.application.navigation.fin_mgmt.users_and_roles'), users_path
+                        %li= link_to t('views.layouts.application.navigation.fin_mgmt.fixed_asset_classes'), fixed_asset_classes_path
+                        %li= link_to t('views.layouts.application.navigation.fin_mgmt.store_locations'), store_locations_path
+                        %li= link_to t('views.layouts.application.navigation.fin_mgmt.cost_centers'), cost_centers_path
+                        %li= link_to t('views.layouts.application.navigation.fin_mgmt.departments'), departments_path
+                    %li.divider
+
+              %form.navbar-search{action: '', method: :get}
+                %input{type: 'text', name: 'instant_search', class: 'search-query', placeholder: t('.placeholder')}
+            %li
+              = link_to root_path do
+                %i.icon-home.icon-white
+            %li
+              = link_to edit_user_registration_path do
+                %i.icon-user.icon-white
+            %li
+              = link_to destroy_user_session_path, method: 'delete' do
+                %i.icon-off.icon-white
+          - else
+            - if controller_name != 'sessions'
+              %li
+                = link_to new_user_session_path do
+                  %i.icon-inbox.icon-white
+            - if false && devise_mapping.registerable? && controller_name != 'registrations'
+              %li
+                = link_to new_user_registration_path do
+                  %i.icon-globe.icon-white

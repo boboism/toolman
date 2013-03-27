@@ -1,0 +1,44 @@
+.row-fluid
+  .span12
+    %h3= t('.tunning_diagram')
+.row-fluid
+  .span3= link_to t(".scan"), scan_tunning_diagrams_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".new_scan"), new_tunning_diagram_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".index_tunning_diagram"), tunning_diagrams_path, class: "btn btn-block btn-large"
+
+.row-fluid
+  .span12
+    %h3= t('.master_data')
+.row-fluid
+  .span3= link_to t(".new_tool_part"), new_tool_part_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".import_tool_part"), import_tool_parts_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".list_tool_part"), tool_parts_path, class: "btn btn-block btn-large"
+.row-fluid
+  .span3= link_to t(".new_tool_bom"), new_tool_bom_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".import_tool_bom"), import_tool_boms_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".list_tool_bom"), tool_boms_path, class: "btn btn-block btn-large"
+
+.row-fluid
+  .span12
+    %h3= t('.issue')
+.row-fluid
+  .span3= link_to t(".new_issue"), issue_work_orders_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".index_issue"), issues_work_orders_path, class: "btn btn-block btn-large"
+.row-fluid
+  .span12
+    %h3= t('.receive')
+.row-fluid
+  .span3= link_to t(".new_receive"), receive_work_orders_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".index_receive"), receives_work_orders_path, class: "btn btn-block btn-large"
+.row-fluid
+  .span12
+    %h3= t('.tune')
+.row-fluid
+  .span3= link_to t(".new_tune"), tune_work_orders_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".index_tune"), tunes_work_orders_path, class: "btn btn-block btn-large"
+.row-fluid
+  .span12
+    %h3= t('.grind')
+.row-fluid
+  .span3= link_to t(".new_grind"), grind_work_orders_path, class: "btn btn-block btn-large"
+  .span3= link_to t(".index_grind"), grinds_work_orders_path, class: "btn btn-block btn-large"

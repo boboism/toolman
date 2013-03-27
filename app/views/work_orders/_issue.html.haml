@@ -1,0 +1,11 @@
+= simple_form_for(@work_order, url: issue_work_orders_path, method: :post, html: {class: "well form-horizontal"}) do |f|
+  = f.error_notification
+  = display_base_errors @work_order
+  .form-inputs
+    = f.input :issued_by, input_html: { class: "input-block-level" }
+    = f.input :hilt_no, input_html: { class: "input-block-level" }, autofocus: true
+    = f.fields_for :work_order_items do |fi|
+      = fi.input :serial_no, input_html: { class: "input-block-level" }
+
+  .form-actions
+    = f.button :submit, t('helpers.links.submit'), class: 'btn-primary'

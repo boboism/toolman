@@ -1,0 +1,29 @@
+= simple_form_for(@tool_part, html: {class: "well form-horizontal"}) do |f|
+  = f.error_notification
+  = display_base_errors @tool_part
+  .form-inputs
+    = f.input :model, input_html: { class: "input-block-level" }
+    = f.input :category, input_html: { class: "input-block-level" }
+    = f.input :sub_category, input_html: { class: "input-block-level" }
+    = f.input :standardized, input_html: { class: "input-block-level" }
+    = f.input :specification, input_html: { class: "input-block-level" }
+    = f.input :machine_quantity, input_html: { class: "input-block-level" }
+    = f.input :available_quantity, input_html: { class: "input-block-level" }
+    = f.input :grindable, input_html: { class: "input-block-level" }
+    = f.input :grinding_time, input_html: { class: "input-block-level" }
+    = f.input :processing_quantity, input_html: { class: "input-block-level" }
+    = f.input :grinding_machine, input_html: { class: "input-block-level" }
+    = f.input :grinding_man_hour, input_html: { class: "input-block-level" }
+    = f.input :material_no, input_html: { class: "input-block-level" }
+    = f.input :manufacturer, input_html: { class: "input-block-level" }
+    = f.input :supplier, input_html: { class: "input-block-level" }
+    = f.input :unit_price, input_html: { class: "input-block-level" }
+    = f.input :min_purchase_quantity, input_html: { class: "input-block-level" }
+    = f.input :stock_no, input_html: { class: "input-block-level" }
+    = f.input :stack_no, input_html: { class: "input-block-level" }
+    = f.input :stock_current, input_html: { class: "input-block-level" }
+    = f.input :stock_max, input_html: { class: "input-block-level" }
+    = f.input :stock_min, input_html: { class: "input-block-level" }
+
+  .form-actions
+    = f.button :submit, t('helpers.links.submit'), class: 'btn-primary'

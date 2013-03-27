@@ -1,0 +1,53 @@
+- model_class = <%= singular_table_name.camelize %>.new.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: model_class.model_name.human, default: t("helpers.views.index.title", title: model_class.model_name.human))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to new_<%= singular_table_name %>_path, class: "btn" do
+          %i.icon-plus
+          %span= t(".new", default: t("helpers.links.new"))
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = form_tag model_class, method: :get, class: "form-search" do
+      .row-fluid
+        .span12
+          .input-append
+            = text_field_tag "[search][text]", nil, class: "search-query", placeholder: t(".placehoder", default: t("helpers.links.search_placeholder"))
+            = button_tag class: "btn" do
+              %i.icon-search
+              %span= t(".search", default: t("helpers.links.search"))
+.row-fluid
+  .span12
+    %table.table.table-condensed.table-hover.my-table
+      %thead
+        %tr
+          %th= check_box_tag "check_#{model_class.name.underscore}"
+<% attributes.each do |attribute| -%>
+          %th= model_class.human_attribute_name(:<%= attribute.name %>)
+<% end -%>
+          %th
+      %tbody
+        - @<%= plural_table_name %>.each do |<%= singular_table_name %>|
+          %tr{href: <%= singular_table_name %>_path(<%= singular_table_name %>)}
+            %td= check_box_tag "#{model_class.name.underscore}_id_#{<%= singular_table_name %>.id}"
+<% attributes.each do |attribute| -%>
+            %td= <%= singular_table_name %>.<%= attribute.name %>
+<% end -%>
+            %td
+              .btn-group.pull-right
+                = link_to <%= singular_table_name %>, class: "btn" do
+                  %i.icon-eye-open
+                  %span= t(".show", default: t("helpers.links.show"))
+                = link_to edit_<%= singular_table_name %>_path(<%= singular_table_name %>), class: "btn" do
+                  %i.icon-pencil
+                  %span= t(".edit", default: t("helpers.links.edit"))
+                = link_to <%= singular_table_name %>, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+                  %i.icon-trash.icon-white
+                  %span= t(".destroy", default: t("helpers.links.destroy"))
+.row-fluid
+  .span12
+    = paginate @<%= plural_table_name %>

@@ -1,0 +1,16 @@
+= simple_form_for(@tool_bom, html: {class: "well form-horizontal"}) do |f|
+  = f.error_notification
+  = display_base_errors @tool_bom
+  .form-inputs
+    = f.input :hilt_no, input_html: { class: "input-block-level" }
+    = f.input :product_line, input_html: { class: "input-block-level" }
+    = f.input :machine_mode, input_html: { class: "input-block-level" }
+    = f.input :machine_code, input_html: { class: "input-block-level" }
+    = f.input :process_position, input_html: { class: "input-block-level" }
+    = f.input :process_hole, input_html: { class: "input-block-level" }
+    = f.input :tunning_machine, input_html: { class: "input-block-level" }
+    = f.input :tunning_mode, input_html: { class: "input-block-level" }
+    = f.input :tunning_man_hour, input_html: { class: "input-block-level" }
+
+  .form-actions
+    = f.button :submit, t('helpers.links.submit'), class: 'btn-primary'

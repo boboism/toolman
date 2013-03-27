@@ -1,0 +1,21 @@
+- model_class = @tunning_diagram.class
+.row-fluid.page-header
+  .span5
+    %h3= t(".title", title: "#{model_class.model_name.human}: #{@tunning_diagram.id}", default: t("helpers.views.edit.title", title: "#{model_class.model_name.human}: #{@tunning_diagram.id}"))
+  .span7
+    .pull-right
+      .btn-group
+        = link_to @tunning_diagram, class: "btn" do
+          %i.icon-eye-open
+          %span= t(".show", default: t("helpers.links.show"))
+        = link_to @tunning_diagram, method: :delete, data: {confirm: t(".destroy_confirm", default: t("helpers.links.destroy_confirm"))}, class: "btn btn-danger" do
+          %i.icon-trash.icon-white
+          %span= t(".destroy", default: t("helpers.links.destroy"))
+        = link_to tunning_diagrams_path, class: "btn" do
+          %i.icon-list
+          %span= t(".index", default: t("helpers.links.index"))
+      .btn-group
+        = render "layouts/toolbar"
+.row-fluid
+  .span12
+    = render "form"

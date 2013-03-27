@@ -1,0 +1,7 @@
+= simple_form_for(:tool_bom, url: import_tool_boms_path, multipart: true, html: {class: "well form-horizontal"}) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.file_field :archive, input_html: { class: "input-block-level" }
+
+  .form-actions
+    = f.button :submit, t('helpers.links.submit'), class: 'btn-primary'
