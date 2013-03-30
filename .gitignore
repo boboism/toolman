@@ -27,6 +27,7 @@ db/*.sqlite3
 .rspec
 .redcar/
 .sass-cache
+/bin
 /config/config.yml
 /config/database.yml
 /coverage.data
@@ -39,6 +40,7 @@ db/*.sqlite3
 /doc/specs.html
 /public/cache
 /public/system
+/public/assets
 /public/tmp/*
 /public/stylesheets/compiled
 /public/system/*
