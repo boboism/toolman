@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130314081925) do
+ActiveRecord::Schema.define(:version => 20130407020803) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -115,6 +115,8 @@ ActiveRecord::Schema.define(:version => 20130314081925) do
     t.integer  "archive_file_size"
     t.datetime "archive_updated_at"
   end
+
+  add_index "tunning_diagrams", ["hilt_no"], :name => "tunning_diagrams_hilt_no"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
