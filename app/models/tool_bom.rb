@@ -25,7 +25,7 @@ class ToolBom < ActiveRecord::Base
     item_header = header.select{|k| k.to_s =~ /tool_bom_items\./ }
     #logger.debug header
 
-    (2..spreadsheet.last_row).each do |i|
+    (3..spreadsheet.last_row).each do |i|
       #logger.debug spreadsheet.row(i).count 
       logger.debug "HEADER: #{header}"
       logger.debug "ITEM HEADER: #{item_header}"
@@ -35,6 +35,7 @@ class ToolBom < ActiveRecord::Base
       tool_bom.attributes = row.to_hash.slice(*accessible_attributes)
 
       tool_part = ToolPart.where(model: row["tool_bom_items.model"]).select{id}.first
+      next unless tool_bom && tool_part
       tool_bom_item_attributes = {tool_bom_id: tool_bom.id, tool_part_id: tool_part.id}
       tool_bom_item = ToolBomItem.where(tool_bom_item_attributes).first || ToolBomItem.new(tool_bom_item_attributes)
       tool_bom_item.attributes = row.to_hash.slice(*item_header)
