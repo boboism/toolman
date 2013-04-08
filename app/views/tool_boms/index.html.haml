@@ -28,7 +28,7 @@
     %table.table.table-condensed.table-hover.my-table
       %thead
         %tr
-          %th= check_box_tag "check_#{model_class.name.underscore}"
+          /%th= check_box_tag "check_#{model_class.name.underscore}"
           %th= model_class.human_attribute_name(:hilt_no)
           %th= model_class.human_attribute_name(:product_line)
           %th= model_class.human_attribute_name(:machine_mode)
@@ -42,7 +42,7 @@
       %tbody
         - @tool_boms.each do |tool_bom|
           %tr{href: tool_bom_path(tool_bom)}
-            %td= check_box_tag "#{model_class.name.underscore}_id_#{tool_bom.id}"
+            /%td= check_box_tag "#{model_class.name.underscore}_id_#{tool_bom.id}"
             %td= tool_bom.hilt_no
             %td= tool_bom.product_line
             %td= tool_bom.machine_mode

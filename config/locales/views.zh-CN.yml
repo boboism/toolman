@@ -47,6 +47,8 @@ zh-CN:
   tool_parts:
     index:
       import: "导入"
+    new_import: 
+      title: "刃具导入"
   users:
     index:
       title: '用户列表'
@@ -107,3 +109,5 @@ zh-CN:
   tool_boms:
     index:
       import: "导入"
+    new_import: 
+      title: "工序号—刀号导入"
