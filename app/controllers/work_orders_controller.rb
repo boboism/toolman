@@ -250,13 +250,19 @@ class WorkOrdersController < ApplicationController
 
     respond_to do |format|
       if @work_order_item && @work_order_item.grind(grind_params)
-        format.html { redirect_to grind_work_orders_url, notice: I18n.t('controllers.update_success', name: @work_order_item.class.model_name.human) }
+        format.html { redirect_to grind_work_orders_url, notice: I18n.t('controllers.work_orders.grind_success', serial_no: params[:work_order_item][:serial_no]) }
         format.json { head :no_content }
         format.xml  { head :no_content }
       else
-        format.html { render action: "new_grind" }
-        format.json { render json: @work_order_item.errors, status: :unprocessable_entity }
-        format.xml  { render xml: @work_order_item.errors, status: :unprocessable_entity }
+        unless @work_order_item
+          format.html { redirect_to grind_work_orders_url, flash: { error: I18n.t('controllers.work_orders.grind_nil_part', serial_no: params[:work_order_item][:serial_no]) } }
+          format.json { render json: I18n.t('controllers.grind_nil_part', name: params[:work_order_item][:serial_no]), status: :unprocessable_entity }
+          format.xml  { render xml: I18n.t('controllers.grind_nil_part', name: params[:work_order_item][:serial_no]), status: :unprocessable_entity }
+        else 
+          format.html { redirect_to grind_work_orders_url, flash: { error: @work_order_item.errors } }
+          format.json { render json: @work_order_item.errors, status: :unprocessable_entity }
+          format.xml  { render xml: @work_order_item.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

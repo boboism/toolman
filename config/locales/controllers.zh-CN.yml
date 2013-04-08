@@ -14,7 +14,9 @@ zh-CN:
       receive_nil_work_order: "系统中没有可回收刀具%{hilt_no}"
       tune_success: "刀具 %{hilt_no} 已经录入调刀信息"
       tune_nil_work_order: "系统中没有可调刀具%{hilt_no}"
-
+      grind_success: "刃具%{serial_no}已经磨刀成功"
+      grind_nil_part: "系统中没有可磨刀具%{serial_no}"
+      
     tool_parts:
       import_success: "刀具导入成功"
 

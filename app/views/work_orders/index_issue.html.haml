@@ -27,16 +27,19 @@
       %thead
         %tr
           %th= model_class.human_attribute_name(:hilt_no)
+          %th= model_class.human_attribute_name(:work_order_items)
           %th= model_class.human_attribute_name(:issued_at)
           %th= model_class.human_attribute_name(:issued_by)
-          %th
       %tbody
         - @work_orders.each do |work_order|
-          %tr{href: work_order_path(work_order)}
-            %td= work_order.hilt_no
-            %td= work_order.issued_at
-            %td= work_order.issued_by_name
-            %td
+          - work_order.work_order_items.each_with_index do |work_order_item, index|
+            %tr{href: work_order_path(work_order)}
+              - if index == 0
+                %td{rowspan: work_order.work_order_items.size}= work_order.hilt_no
+              %td= work_order_item.serial_no
+              - if index == 0
+                %td= work_order.issued_at
+                %td= work_order.issued_by_name
 .row-fluid
   .span12
     = paginate @work_orders

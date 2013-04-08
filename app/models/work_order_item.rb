@@ -24,6 +24,7 @@ class WorkOrderItem < ActiveRecord::Base
   end
 
   def grinded_by_name; grinded_by ? grinded_by.name : ""; end
+  def grindable?; tool_part_item.tool_part.grindable; end
 
   def grind(params={})
     ActiveRecord::Base.transaction do

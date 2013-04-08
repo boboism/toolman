@@ -39,7 +39,7 @@
           %th= work_order_item_class.human_attribute_name(:grinding_man_hour)
       %tbody
         - @work_orders.each do |work_order|
-          - work_order.work_order_items.each_with_index do |work_order_item, index|
+          - work_order.work_order_items.select(&:grindable?).each_with_index do |work_order_item, index|
             %tr{href: work_order_path(work_order)}
               - if index == 0
                 %td{rowspan: work_order.work_order_items.size}= work_order.hilt_no
