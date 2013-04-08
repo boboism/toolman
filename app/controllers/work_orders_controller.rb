@@ -131,7 +131,7 @@ class WorkOrdersController < ApplicationController
   # GET /work_orders.json
   # GET /work_orders.xml
   def index_issue
-    @work_orders = WorkOrder.accessible_by(current_ability).search(params[:search]).order("issued_at desc, received").page(params[:page])
+    @work_orders = WorkOrder.accessible_by(current_ability).search(params[:search]).order("issued_at desc, received").page(params[:page]).includes{work_order_items.tool_part_item}
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @work_orders }
@@ -172,7 +172,7 @@ class WorkOrdersController < ApplicationController
   # GET /work_orders.json
   # GET /work_orders.xml
   def index_receive
-    @work_orders = WorkOrder.accessible_by(current_ability).search(params[:search]).order("issued_at desc, received").page(params[:page])
+    @work_orders = WorkOrder.accessible_by(current_ability).search(params[:search]).order("issued_at desc, received").page(params[:page]).includes{work_order_items.tool_part_item}
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @work_orders }
@@ -221,7 +221,7 @@ class WorkOrdersController < ApplicationController
   end
   
   def index_grind
-    @work_orders = WorkOrder.grindable.accessible_by(current_ability).search(params[:search]).order("tuned_at desc, tuned").page(params[:page])
+    @work_orders = WorkOrder.grindable.accessible_by(current_ability).search(params[:search]).order("tuned_at desc, tuned").page(params[:page]).includes{work_order_items.tool_part_item.tool_part}
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @work_orders }
