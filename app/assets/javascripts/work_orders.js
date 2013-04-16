@@ -96,6 +96,14 @@ fill_blade_index_to_label = function() {
   });
 }
 
+auto_focus_new_issue_form = function() {
+  $("form#new_work_order #work_order_hilt_no").focus();
+} 
+
+auto_focus_new_grind_form = function() {
+  $("form#new_work_order_item #work_order_item_serial_no").focus();
+}
+
 $(function() {
   fetch_tool_bom_tune_info();      
   fetch_tool_bom();
@@ -103,4 +111,6 @@ $(function() {
   auto_submit_receive();
   fetch_tool_bom_item();
   fill_blade_index_to_label();
+  auto_focus_new_grind_form();
+  auto_focus_new_issue_form();
 });
