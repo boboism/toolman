@@ -48,9 +48,10 @@ class ToolPart < ActiveRecord::Base
         max_index = (tool_part_items.map{ |item| (item.serial_no.scan(/\d+$/)||"0").to_i }.max || [0,]).first
         logger.debug "max_index=#{max_index}"
         (1..variance).each do |i|
-          logger.debug "Inserting Item #{model}-#{max_index+i}"
+          part_index = (max_index + 1).to_s.rjust(2,'0')
+          logger.debug "Inserting Item #{model}-#{part_index}"
           ToolPartItem.create({ tool_part_id: id, 
-                                serial_no: "#{model}-#{max_index+i}",
+                                serial_no: "#{model}-#{part_index}",
                                 quantity: 1,
                                 accumulated_grinding_time: 0,
                                 accumulated_processing_quantity: 0 })
